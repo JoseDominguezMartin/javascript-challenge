@@ -18,24 +18,27 @@ console.log(data);
    });
  });
 
- var submit = d3.select("#submit");
+var button = d3.select('#filter-btn');
 
- submit.on("click", function() {
-  
-   d3.event.preventDefault();
- 
-   d3.select(".summary").html("");
- 
-   var inputElement = d3.select("#datetime");
-   var inputValue = inputElement.property("value");
+button.on('click', function () {
+    // d3.event.preventDefault()
+    var inputField = d3.select('#datetime');
+    var inputValue = inputField.property('value');
+    console.log(inputValue)
 
-   var filteredData = tableData.filter(tableData => tableData.datetime === inputValue);
- 
-   filteredData.forEach((dateData) => {
-     var row = tbody.append("tr");
-     Object.entries(dateData).forEach(([key, value]) => {
-       var cell = tbody.append("td");
-       cell.text(value);
-     });
-   });
- });
+    var filteredData = tableData.filter(item => item.datetime === inputValue);
+
+    console.log(filteredData);
+
+    var outcome = d3.select('#filters');
+    tbody.html("")
+    filteredData.forEach((entry) => {
+        console.log(entry);
+        var row = tbody.append('tr');
+
+    Object.entries(entry).forEach(([key, value]) => {
+        console.log(key, value);
+        var cell = row.append('td');
+        cell.text(value);
+    });
+});
